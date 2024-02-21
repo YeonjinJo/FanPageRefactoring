@@ -11,6 +11,7 @@ import {
   StSelect,
   StTextarea,
   StButton,
+  StInputReadOnly,
 } from "../styles/MyStyles";
 import Jobs from "./Jobs";
 import axios from "axios";
@@ -118,7 +119,7 @@ const AddForm = () => {
       </StSection>
       <StSection>
         <label>Addresser</label>
-        <StInput
+        <StInputReadOnly
           id={id + "addresser"}
           type="text"
           value={addresser}

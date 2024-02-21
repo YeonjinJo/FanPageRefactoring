@@ -119,7 +119,10 @@ export const inputStyle = `
 export const StInput = styled.input`
   ${inputStyle}
 `;
-
+export const StInputReadOnly = styled.input`
+  ${inputStyle}
+  background-color: lightgray;
+`;
 export const StSelect = styled.select`
   ${inputStyle}
   width: 43.25vw;
