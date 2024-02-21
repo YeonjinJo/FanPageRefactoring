@@ -11,7 +11,7 @@ import {
   StTextarea,
   StModifyContainer,
 } from "../styles/MyStyles";
-import axios from "axios";
+import LoadProfile from "./LoadProfile";
 
 function ModifyHandler() {
   const [modifyOpen, setModifyOpen] = useState(false);
@@ -64,23 +64,7 @@ function ModifyHandler() {
     }
   };
 
-  const [email, setEmail] = useState("");
-  const token = useSelector((state) => state.auth.token);
-
-  const loadProfile = async () => {
-    const { data } = await axios.get(
-      `${process.env.REACT_APP_AUTH_SERVER_ADDRESS}/user`,
-      {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
-    setEmail(data.id);
-  };
-  loadProfile();
-
+  const { email } = LoadProfile();
   const comparison = target[0].email === email;
 
   return (

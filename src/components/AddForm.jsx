@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import uuid from "react-uuid";
 
@@ -14,14 +14,12 @@ import {
   StInputReadOnly,
 } from "../styles/MyStyles";
 import Jobs from "./Jobs";
-import axios from "axios";
+import LoadProfile from "./LoadProfile";
 
 const AddForm = () => {
   const [title, setTitle] = useState("");
   const titleRef = useRef();
   const [receiver, setReceiver] = useState("/job0");
-  const [addresser, setAddresser] = useState("");
-  const [email, setEmail] = useState("");
   const [content, setContent] = useState("");
   const contentRef = useRef();
 
@@ -29,31 +27,16 @@ const AddForm = () => {
   const id = uuid();
   const dispatch = useDispatch();
 
-  const token = useSelector((state) => state.auth.token);
-
-  const loadProfile = async () => {
-    const { data } = await axios.get(
-      `${process.env.REACT_APP_AUTH_SERVER_ADDRESS}/user`,
-      {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
-    setAddresser(data.nickname)
-    setEmail(data.id)
-  };
-  loadProfile();
+  const { nickname, email } = LoadProfile();
 
   const onSubmitHandler = (event) => {
     const today = new Date();
     const year = today.getFullYear();
-    const month = (today.getMonth()+1).toString().padStart(2,'0');
-    const date = today.getDate().toString().padStart(2,'0');
-    const hours = today.getHours().toString().padStart(2,'0');
-    const minutes = today.getMinutes().toString().padStart(2,'0');
-    const seconds = today.getSeconds().toString().padStart(2,'0');
+    const month = (today.getMonth() + 1).toString().padStart(2, "0");
+    const date = today.getDate().toString().padStart(2, "0");
+    const hours = today.getHours().toString().padStart(2, "0");
+    const minutes = today.getMinutes().toString().padStart(2, "0");
+    const seconds = today.getSeconds().toString().padStart(2, "0");
     const timeString = `${year}/${month}/${date} ${hours}:${minutes}:${seconds}`;
 
     event.preventDefault();
@@ -69,7 +52,7 @@ const AddForm = () => {
           id,
           title,
           receiver,
-          addresser,
+          addresser: nickname,
           email,
           timeString,
           content,
@@ -122,7 +105,7 @@ const AddForm = () => {
         <StInputReadOnly
           id={id + "addresser"}
           type="text"
-          value={addresser}
+          value={nickname}
           readOnly
         />
       </StSection>

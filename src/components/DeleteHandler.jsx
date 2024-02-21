@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 
 import { StButton } from "../styles/MyStyles";
 import { deleteBoard } from "../redux/modules/boardSlice";
-import axios from "axios";
+import LoadProfile from "./LoadProfile";
 
 const DeleteHandler = () => {
   const boardItems = useSelector((state) => state.boardItems.boardItems);
@@ -27,22 +27,7 @@ const DeleteHandler = () => {
     }
   };
 
-  const [email, setEmail] = useState("");
-  const token = useSelector((state) => state.auth.token);
-
-  const loadProfile = async () => {
-    const { data } = await axios.get(
-      `${process.env.REACT_APP_AUTH_SERVER_ADDRESS}/user`,
-      {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
-    setEmail(data.id);
-  };
-  loadProfile();
+  const { email } = LoadProfile();
 
   const comparison = target[0].email === email;
 
