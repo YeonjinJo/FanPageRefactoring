@@ -3,7 +3,6 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 
-import Password from "./Password";
 import { modifyBoard } from "../redux/modules/boardSlice";
 import {
   StButton,
@@ -13,7 +12,7 @@ import {
   StModifyContainer,
 } from "../styles/MyStyles";
 
-function ModifyHandler(props) {
+function ModifyHandler() {
   const [modifyOpen, setModifyOpen] = useState(false);
   const boardItems = useSelector((state) => state.boardItems.boardItems);
   const list = useLocation().state.list;
@@ -21,23 +20,15 @@ function ModifyHandler(props) {
 
   const target = boardItems.filter((element) => id === element.id);
   const [newTitle, setNewTitle] = useState(target[0].title);
-  const [newAddresser, setNewAddresser] = useState(target[0].addresser);
   const [newContent, setNewContent] = useState(target[0].content);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const modifyForm = () => {
-    if (!props.passwordOpen) {
-      props.setPasswordOpen(true);
-    } else {
-      if (props.password === target[0].password) {
+    
         setModifyOpen(true);
-      } else {
-        alert("Wrong Password!");
-        props.setPassword("");
-      }
-    }
+     
   };
 
   const modifyHandler = () => {
@@ -59,8 +50,8 @@ function ModifyHandler(props) {
         id: target[0].id,
         title: newTitle,
         receiver: target[0].receiver,
-        addresser: newAddresser,
-        password: target[0].password,
+        addresser: target[0].addresser,
+        email: target[0].email,
         timeString,
         content: newContent,
       };
@@ -78,10 +69,10 @@ function ModifyHandler(props) {
     <>
       {!modifyOpen ? (
         <>
-          <h3>{props.element.title}</h3>
-          <p className="addresser">from. {props.element.addresser}</p>
-          <p className="time">{props.element.timeString}</p>
-          <p className="content">{props.element.content}</p>
+          <h3>{target[0].title}</h3>
+          <p className="addresser">from. {target[0].addresser}</p>
+          <p className="time">{target[0].timeString}</p>
+          <p className="content">{target[0].content}</p>
         </>
       ) : (
         <>
@@ -95,16 +86,6 @@ function ModifyHandler(props) {
                 value={newTitle}
                 maxLength={10}
                 onChange={(event) => setNewTitle(event.target.value)}
-              />
-            </StSection>
-            <StSection>
-              <label>Addresser</label>
-              <StInput
-                id={id + "addresser"}
-                type="text"
-                value={newAddresser}
-                maxLength={5}
-                onChange={(event) => setNewAddresser(event.target.value)}
               />
             </StSection>
             <StSection>
@@ -126,12 +107,7 @@ function ModifyHandler(props) {
       >
         Modify
       </StButton>
-      <Password
-        id={id}
-        passwordOpen={props.passwordOpen}
-        password={props.password}
-        setPassword={props.setPassword}
-      />
+      
     </>
   );
 }

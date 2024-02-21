@@ -1,5 +1,4 @@
 import React from "react";
-import { useState } from "react";
 import { useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 
@@ -8,9 +7,6 @@ import DeleteHandler from "./DeleteHandler";
 import ModifyHandler from "./ModifyHandler";
 
 const DetailPage = () => {
-  const [password, setPassword] = useState("");
-  const [passwordOpen, setPasswordOpen] = useState(false);
-
   const boardItems = useSelector((state) => state.boardItems.boardItems);
   const id = useLocation().state.id;
 
@@ -21,19 +17,8 @@ const DetailPage = () => {
         .map((element) => {
           return (
             <StDetailContainer key={element.id}>
-              <ModifyHandler
-                element={element}
-                password={password}
-                setPassword={setPassword}
-                passwordOpen={passwordOpen}
-                setPasswordOpen={setPasswordOpen}
-              />
-              <DeleteHandler
-                password={password}
-                setPassword={setPassword}
-                passwordOpen={passwordOpen}
-                setPasswordOpen={setPasswordOpen}
-              />
+              <ModifyHandler />
+              <DeleteHandler />
             </StDetailContainer>
           );
         })}

@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import uuid from "react-uuid";
 
@@ -13,21 +13,37 @@ import {
   StButton,
 } from "../styles/MyStyles";
 import Jobs from "./Jobs";
+import axios from "axios";
 
 const AddForm = () => {
   const [title, setTitle] = useState("");
   const titleRef = useRef();
   const [receiver, setReceiver] = useState("/job0");
   const [addresser, setAddresser] = useState("");
-  const addresserRef = useRef();
-  const [password, setPassword] = useState("");
-  const passwordRef = useRef();
+  const [email, setEmail] = useState("");
   const [content, setContent] = useState("");
   const contentRef = useRef();
 
   const navigate = useNavigate();
   const id = uuid();
   const dispatch = useDispatch();
+
+  const token = useSelector((state) => state.auth.token);
+
+  const loadProfile = async () => {
+    const { data } = await axios.get(
+      `${process.env.REACT_APP_AUTH_SERVER_ADDRESS}/user`,
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    setAddresser(data.nickname)
+    setEmail(data.id)
+  };
+  loadProfile();
 
   const onSubmitHandler = (event) => {
     const today = new Date();
@@ -43,12 +59,6 @@ const AddForm = () => {
     if (!title) {
       alert("Title is Empty!");
       titleRef.current.focus();
-    } else if (!addresser) {
-      alert("Addresser is Empty!");
-      addresserRef.current.focus();
-    } else if (!password) {
-      alert("Set Your Password!");
-      passwordRef.current.focus();
     } else if (!content) {
       alert("No Letter Content!");
       contentRef.current.focus();
@@ -59,7 +69,7 @@ const AddForm = () => {
           title,
           receiver,
           addresser,
-          password,
+          email,
           timeString,
           content,
         };
@@ -70,8 +80,6 @@ const AddForm = () => {
         navigate(receiver);
 
         setTitle("");
-        setAddresser("");
-        setPassword("");
         setContent("");
       } else {
         alert("Cancelled");
@@ -114,22 +122,7 @@ const AddForm = () => {
           id={id + "addresser"}
           type="text"
           value={addresser}
-          ref={addresserRef}
-          placeholder="Addresser → Less than 5 char"
-          maxLength={5}
-          onChange={(event) => setAddresser(event.target.value)}
-        />
-      </StSection>
-      <StSection>
-        <label>Password</label>
-        <StInput
-          id={id + "password"}
-          type="password"
-          value={password}
-          ref={passwordRef}
-          placeholder="Password → Less than 8 char"
-          maxLength={8}
-          onChange={(event) => setPassword(event.target.value)}
+          readOnly
         />
       </StSection>
       <StSection>

@@ -9,14 +9,18 @@ export const makeFlex = `
 `;
 
 export const StContainer = styled.div`
-  ${makeFlex}
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: top;
   overflow: auto;
+  height: 84vh;
 `;
 
 export const StHeader = styled.header`
   ${makeFlex}
   background-color: lightpink;
-  padding: 2vh 0 0 0 ;
+  padding: 2vh 0 0 0;
   height: 12vh;
 `;
 
@@ -41,7 +45,6 @@ export const StFooter = styled.footer`
   width: 100vw;
   height: 4vh;
 `;
-
 
 export const StTitle = styled(Link)`
   text-decoration: none;
@@ -189,7 +192,6 @@ export const StDetailContainer = styled.div`
   width: 50vw;
   height: 48vh;
 
-
   & h3 {
     grid-area: title;
     text-align: center;
@@ -268,14 +270,14 @@ export const StLoginSection = styled.section`
   align-items: center;
   justify-content: right;
   width: 100%;
-`
+`;
 
 export const StLoginInput = styled.input`
-padding: 1vh;
-margin: 1vh;
-border: 0.2rem solid black;
-border-radius: 0.5rem;
-width: 30vw;
+  padding: 1vh;
+  margin: 1vh;
+  border: 0.2rem solid black;
+  border-radius: 0.5rem;
+  width: 30vw;
 `;
 
 const buttonStyle = `
@@ -293,9 +295,9 @@ const buttonStyle = `
 `;
 
 export const StLoginButton = styled.button`
-${buttonStyle}
-margin: 1vh;
-width: 18vw;
+  ${buttonStyle}
+  margin: 1vh;
+  width: 18vw;
 `;
 
 export const StMoveButton = styled(Link)`
@@ -312,6 +314,12 @@ export const StSign = styled.div`
   flex-direction: row;
 `;
 
-export const StSignOut = styled.button`
-  
+export const StProfileNickname = styled.h3`
+  font-size: 4vh;
+  margin: 1vh;
+`;
+
+export const StProfileEmail = styled.p`
+  font-size: 2vh;
+  margin: 1vh;
 `

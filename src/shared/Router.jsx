@@ -12,6 +12,7 @@ import Profile from "../routes/Profile";
 import { StContainer } from "../styles/MyStyles";
 import { ToastContainer } from "react-toastify";
 import Register from "../routes/Register";
+import ProfileModify from "../routes/ProfileModify";
 
 function Router() {
   return (
@@ -26,6 +27,7 @@ function Router() {
         <Route path="/job3" element={<Board />} />
         <Route path="/job4" element={<Board />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/modify" element={<ProfileModify />} />
         <Route path="/letter" element={<Letter />} />
         <Route path="/detail" element={<Detail />} />
         <Route path="/search" element={<Search />} />
