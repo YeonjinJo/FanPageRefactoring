@@ -8,7 +8,7 @@ function Register() {
   const token = useSelector((state) => state.auth.token);
 
   useEffect(() => {
-    if (!token) {navigate("/")} 
+    if (token) {navigate("/home")} 
   }, []);
 
   return (
