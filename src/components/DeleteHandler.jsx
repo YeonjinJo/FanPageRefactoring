@@ -28,7 +28,6 @@ const DeleteHandler = () => {
   };
 
   const { email } = LoadProfile();
-
   const comparison = target[0].email === email;
 
   return (

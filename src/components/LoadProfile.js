@@ -1,6 +1,6 @@
-import axios from 'axios';
-import { useState } from 'react'
-import { useSelector } from 'react-redux';
+import axios from "axios";
+import { useState } from "react";
+import { useSelector } from "react-redux";
 
 function LoadProfile() {
   const [nickname, setNickname] = useState("");
@@ -18,13 +18,13 @@ function LoadProfile() {
         },
       }
     );
-    setNickname(data.nickname)
-    setEmail(data.id)
+    setNickname(data.nickname);
+    setEmail(data.id);
   };
 
-  loadProfile()
-  
-  return {nickname, email}
+  loadProfile();
+
+  return { nickname, email };
 }
 
-export default LoadProfile
+export default LoadProfile;

@@ -14,7 +14,7 @@ export const StContainer = styled.div`
   align-items: center;
   justify-content: top;
   overflow: auto;
-  height: 84vh;
+  height: 80vh;
 `;
 
 export const StHeader = styled.header`
@@ -30,6 +30,7 @@ export const StMenuBar = styled.div`
   padding: 0 0 2vh 0;
   margin-bottom: 2vh;
   width: 100vw;
+  height: 15vh;
 `;
 
 export const StFooter = styled.footer`
@@ -43,7 +44,7 @@ export const StFooter = styled.footer`
   position: absolute;
   bottom: 0;
   width: 100vw;
-  height: 4vh;
+  height: 8vh;
 `;
 
 export const StTitle = styled(Link)`
@@ -266,6 +267,7 @@ export const SearchSelect = styled.select`
 
 export const StLoginForm = styled.form`
   ${makeFlex}
+  height: 84vh;
 `;
 
 export const StLoginSection = styled.section`
