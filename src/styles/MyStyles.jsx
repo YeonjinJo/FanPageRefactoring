@@ -267,7 +267,7 @@ export const SearchSelect = styled.select`
 
 export const StLoginForm = styled.form`
   ${makeFlex}
-  height: 84vh;
+  height: 80vh;
 `;
 
 export const StLoginSection = styled.section`
