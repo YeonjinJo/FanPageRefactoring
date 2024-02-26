@@ -3,7 +3,9 @@ import axios from "axios";
 
 const initialState = { boardItems: [] };
 
-const { data } = await axios.get(`${process.env.REACT_APP_SERVER_ADDRESS}/content`);
+const { data } = await axios.get(
+  `${process.env.REACT_APP_SERVER_ADDRESS}/content`
+);
 data.forEach((element) => {
   initialState.boardItems.push(element);
 });
@@ -13,7 +15,10 @@ const boardSlice = createSlice({
   initialState,
   reducers: {
     addBoard: (state, action) => {
-      axios.post(`${process.env.REACT_APP_SERVER_ADDRESS}/content`, action.payload);
+      axios.post(
+        `${process.env.REACT_APP_SERVER_ADDRESS}/content`,
+        action.payload
+      );
 
       return {
         ...state,
@@ -33,7 +38,9 @@ const boardSlice = createSlice({
     },
 
     deleteBoard: (state, action) => {
-      axios.delete(`${process.env.REACT_APP_SERVER_ADDRESS}/content/${action.payload.id}`);
+      axios.delete(
+        `${process.env.REACT_APP_SERVER_ADDRESS}/content/${action.payload.id}`
+      );
 
       return {
         ...state,
@@ -44,7 +51,10 @@ const boardSlice = createSlice({
     },
 
     modifyBoard: (state, action) => {
-      axios.patch(`${process.env.REACT_APP_SERVER_ADDRESS}/content/${action.payload.id}`, action.payload);
+      axios.patch(
+        `${process.env.REACT_APP_SERVER_ADDRESS}/content/${action.payload.id}`,
+        action.payload
+      );
 
       const newBoardItems = state.boardItems.filter(
         (element) => action.payload.id !== element.id
